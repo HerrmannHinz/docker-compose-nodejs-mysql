@@ -1,0 +1,27 @@
+version: '2'
+services:
+  nodejs:
+    build:
+      context: nodejs
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    depends_on:
+      - mysql
+    environment:
+      - DATABASE_HOST=mysql
+      - DATABASE_NAME=nodejs
+      - DATABASE_USER=nodejs
+      - DATABASE_PASS=formetoknowforyoutofindout
+    volumes:
+      - ./nodejs:/nodejs
+  mysql:
+     image: mysql:5.7
+     container_name: mysql
+     volumes:
+       - ./mysql/data:/var/lib/mysql
+     environment:
+       MYSQL_ROOT_PASSWORD: "XxxxXformetoknowforyoutofindoutXxxxX"
+       MYSQL_DATABASE: nodejs
+       MYSQL_USER: nodejs
+       MYSQL_PASSWORD: "formetoknowforyoutofindout"
